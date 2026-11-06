@@ -8,6 +8,7 @@ import Footer from './sections/Footer';
 export default function App() {
   return (
     <div id="top">
+      <a className="skip-link" href="#manifesto">Skip cinematic intro</a>
       <Cursor />
       <Header />
       <main>

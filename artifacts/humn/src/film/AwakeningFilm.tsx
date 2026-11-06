@@ -5,6 +5,7 @@ import { AWAKENING_XFADE_VH, clamp } from './config';
 import { stageState } from './progressBus';
 import { createSideStrands } from './sideStrands';
 import MobileAwakeningAccents from './MobileAwakeningAccents';
+import { createFrameSequence, type Frame } from './frameSequence';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -110,23 +111,6 @@ const pickFrameDir = () => {
 const frameUrl = (dir: string, i: number) =>
   `${import.meta.env.BASE_URL}film/${dir}/f${String(i + 1).padStart(3, '0')}.webp`;
 
-/* coarse-to-fine load order: every 16th frame first, then 8th, 4th, 2nd, rest,
-   so the whole shot is scrubbable early and fills in detail as it loads */
-const loadOrder = () => {
-  const seen = new Uint8Array(FRAME_COUNT);
-  const order: number[] = [];
-  for (const step of [16, 8, 4, 2, 1]) {
-    for (let i = 0; i < FRAME_COUNT; i += step) {
-      if (!seen[i]) {
-        seen[i] = 1;
-        order.push(i);
-      }
-    }
-  }
-  if (!seen[FRAME_COUNT - 1]) order.push(FRAME_COUNT - 1);
-  return order;
-};
-
 export default function AwakeningFilm() {
   const driverRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -180,163 +164,32 @@ export default function AwakeningFilm() {
       poster.src = frameUrl('awakening', firstFrame);
     }
 
-    /* — frames —
-       Decoded 1080p frames are ~8MB each (479 of them would be ~4GB), so the
-       browser would keep evicting and re-decoding them on the main thread
-       mid-scroll: that was the stutter. Instead the compressed files stay in
-       memory as blobs (~30MB), and only a small window of frames around the
-       playhead is decoded to ImageBitmaps, off the main thread, biased in the
-       scroll direction. Every KEY_STEP-th frame is also kept decoded at half
-       size, so a fast flick always has something close to show. */
+    // Decode only the playhead window. Before interaction, the poster and one
+    // exact frame are enough; idle visitors should not download a 31 MB film.
     const dir = pickFrameDir();
     const hd = dir === 'awakening-hd';
-    const WINDOW = hd ? 30 : 24; // full-size decoded frames held at once
-    const KEY_STEP = 8;
-    const PARALLEL = Math.max(2, Math.min(4, (navigator.hardwareConcurrency || 4) - 2));
-    const blobs: (Blob | null)[] = new Array(FRAME_COUNT).fill(null);
-    const full = new Map<number, ImageBitmap>();
-    const keys = new Map<number, ImageBitmap>();
-    const decoding = new Set<number>();
     let disposed = false;
     let dirty = true;
-    let srcW = hd ? 1920 : 1280;
-    let srcH = hd ? 1078 : 718;
-    let center = firstFrame; // playhead frame
-    let heading = 1; // scroll direction
-    let exact = false; // last draw showed the exact frame
-    let keyless = false;
-
-    const decodeKey = (i: number) => {
-      const blob = blobs[i];
-      if (!blob || keyless || keys.has(i)) return;
-      createImageBitmap(blob, {
-        resizeWidth: Math.round(srcW / 2),
-        resizeHeight: Math.round(srcH / 2),
-        resizeQuality: 'medium',
-      })
-        .then((bmp) => {
-          if (disposed) return bmp.close();
-          /* browsers that ignore the resize options (older Safari) would hold
-             full-size key frames; skip them there to keep memory bounded */
-          if (bmp.width > srcW * 0.6) {
-            bmp.close();
-            keyless = true;
-            return;
-          }
-          keys.set(i, bmp);
-          if (!exact) dirty = true;
-        })
-        .catch(() => {});
-    };
-
-    const decodeFull = (i: number) => {
-      const blob = blobs[i];
-      if (!blob) return;
-      decoding.add(i);
-      createImageBitmap(blob)
-        .then((bmp) => {
-          if (disposed) return bmp.close();
-          full.set(i, bmp);
-          if (Math.abs(i - center) <= 2) dirty = true;
-          /* evict the frames furthest from the playhead */
-          while (full.size > WINDOW) {
-            let far = -1;
-            let farD = -1;
-            full.forEach((_, k) => {
-              const d = Math.abs(k - center);
-              if (d > farD) {
-                farD = d;
-                far = k;
-              }
-            });
-            full.get(far)!.close();
-            full.delete(far);
-          }
-        })
-        .catch(() => {})
-        .finally(() => {
-          decoding.delete(i);
-          pump();
-        });
-    };
-
-    /* next frame to decode: nearest missing one, ahead first */
-    const nextWanted = () => {
-      const ahead = Math.round(WINDOW * 0.7);
-      const behind = WINDOW - ahead;
-      for (let d = 0; d <= ahead; d++) {
-        const a = center + d * heading;
-        if (a >= 0 && a < FRAME_COUNT && blobs[a] && !full.has(a) && !decoding.has(a)) return a;
-        if (d > 0 && d <= behind) {
-          const b = center - d * heading;
-          if (b >= 0 && b < FRAME_COUNT && blobs[b] && !full.has(b) && !decoding.has(b)) return b;
-        }
-      }
-      return -1;
-    };
-    function pump() {
-      while (!disposed && decoding.size < PARALLEL) {
-        const i = nextWanted();
-        if (i < 0) break;
-        decodeFull(i);
-      }
-    }
-
-    /* fetch the compressed frames: first frame, then coarse-to-fine */
-    const fetchFrame = (i: number) =>
-      fetch(frameUrl(dir, i))
-        .then((r) => (r.ok ? r.blob() : null))
-        .then((b) => {
-          if (disposed || !b) return;
-          blobs[i] = b;
-          if (i % KEY_STEP === 0) decodeKey(i);
-          if (Math.abs(i - center) <= WINDOW) pump();
-        })
-        .catch(() => {});
-    (async () => {
-      await fetchFrame(firstFrame);
-      const b0 = blobs[firstFrame];
-      if (b0) {
-        const bmp = await createImageBitmap(b0).catch(() => null);
-        if (bmp && !disposed) {
-          srcW = bmp.width;
-          srcH = bmp.height;
-          full.set(firstFrame, bmp);
-          resize();
-        }
-      }
-      const queue = loadOrder().filter((i) => i >= firstFrame && i !== firstFrame);
-      const worker = async () => {
-        while (queue.length && !disposed) await fetchFrame(queue.shift()!);
-      };
-      await Promise.all([worker(), worker(), worker(), worker(), worker(), worker()]);
-    })();
-
-    /* best available image for frame i */
-    const pick = (i: number): ImageBitmap | null => {
-      for (let d = 1; d <= 2; d++) {
-        const a = full.get(i - d * heading) ?? full.get(i + d * heading);
-        if (a) return a;
-      }
-      const k = Math.round(i / KEY_STEP) * KEY_STEP;
-      const key = keys.get(k) ?? keys.get(k - KEY_STEP) ?? keys.get(k + KEY_STEP);
-      if (key) return key;
-      let best: ImageBitmap | null = null;
-      let bestD = Infinity;
-      full.forEach((v, j) => {
-        if (Math.abs(j - i) < bestD) {
-          bestD = Math.abs(j - i);
-          best = v;
-        }
-      });
-      keys.forEach((v, j) => {
-        if (Math.abs(j - i) < bestD) {
-          bestD = Math.abs(j - i);
-          best = v;
-        }
-      });
-      return best;
-    };
+    const srcW = hd ? 1920 : 1280;
+    const srcH = hd ? 1078 : 718;
+    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+    const sequence = createFrameSequence({
+      first: firstFrame,
+      count: FRAME_COUNT,
+      capacity: hd ? 12 : 16,
+      concurrency: saveData ? 2 : 3,
+      previews: !saveData,
+      url: (index) => frameUrl(dir, index),
+      onFrame: () => { dirty = true; },
+    });
+    let onScreen = true;
+    const updateActivity = () => sequence.setActive(onScreen && !document.hidden && !reduced);
+    const io = new IntersectionObserver(([entry]) => {
+      onScreen = entry.isIntersecting;
+      updateActivity();
+    });
+    io.observe(driver);
+    document.addEventListener('visibilitychange', updateActivity);
 
     /* — canvas sizing: the video canvas covers only the on-screen part of
        the frame box (see frameCssWidth), never the whole screen, and never
@@ -374,6 +227,7 @@ export default function AwakeningFilm() {
       fh = bh * dpr;
       paintMask(w, h, bx, by, bw, bh);
       strands.resize(w, h, bw, portrait);
+      if (reduced && strands.on) strands.draw(0, 0);
       /* resizing a canvas resets its context state */
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = smoothQ;
@@ -382,8 +236,8 @@ export default function AwakeningFilm() {
 
     /* the box is computed from the source size, so half-size key frames
        fill the same box */
-    const drawCover = (img: ImageBitmap) => {
-      ctx.drawImage(img, fx, fy, fw, fh);
+    const drawCover = (frame: Frame) => {
+      ctx.drawImage(frame.image, fx, fy, fw, fh);
     };
 
     /* the static layer, in css px (it is all soft gradients, so 1x is
@@ -439,22 +293,18 @@ export default function AwakeningFilm() {
         ? firstFrame + clamp(p / videoEnd) * (FRAME_COUNT - 1 - firstFrame)
         : framePos(p / videoEnd);
       const i0 = Math.floor(pos);
-      if (i0 !== center) {
-        heading = i0 > center ? 1 : -1;
-        center = i0;
-        pump();
-      }
+      if (!reduced) sequence.seek(i0);
       if (!dirty && Math.abs(pos - lastPos) < 0.002) return;
       dirty = false;
       lastPos = pos;
       const i1 = Math.min(FRAME_COUNT - 1, i0 + 1);
       const f = pos - i0;
-      const a = full.get(i0) ?? pick(i0);
+      const a = sequence.get(i0) ?? sequence.nearest(i0);
       if (!a) return;
-      exact = full.has(i0);
+      const exact = Boolean(sequence.get(i0));
       ctx.globalAlpha = 1;
       drawCover(a);
-      const b = exact && !gecko ? full.get(i1) : undefined;
+      const b = exact && !gecko && !touch ? sequence.get(i1) : undefined;
       if (b && f > 0.02) {
         ctx.globalAlpha = f;
         drawCover(b);
@@ -485,7 +335,7 @@ export default function AwakeningFilm() {
     let lastDrift = -1;
     let lastHeroA = 1;
     const render = (p: number) => {
-      draw(p);
+      if (onScreen) draw(p);
       /* hero title lifts away over the first stretch */
       const heroA = 1 - clamp(p / 0.12);
       if (heroA > 0 || lastHeroA > 0) {
@@ -520,6 +370,7 @@ export default function AwakeningFilm() {
     let lastSmooth = NaN;
     let lastTarget = NaN;
     const tick = () => {
+      if (document.hidden) return;
       /* light smoothing only — Lenis already eases the scroll; more would lag */
       smooth += (target - smooth) * (reduced || touch ? 1 : 0.42);
       if (Math.abs(target - smooth) < 1e-5) smooth = target;
@@ -531,8 +382,8 @@ export default function AwakeningFilm() {
         render(smooth);
       }
       /* side strands: stay put and fade with the head (they sit in the stage) */
-      if (strands.on && lastFade > 0.001 && target < 1) {
-        strands.draw(reduced ? 0 : performance.now() / 1000, smooth);
+      if (onScreen && strands.on && lastFade > 0.001 && target < 1 && !reduced) {
+        strands.draw(performance.now() / 1000, smooth);
       }
     };
     gsap.ticker.add(tick);
@@ -542,6 +393,7 @@ export default function AwakeningFilm() {
        heavy page-load work (frames, WebGL) can never make it stutter */
 
     const settle = () => {
+      if (disposed) return;
       if (jump !== null) {
         window.scrollTo(0, Number(jump) || 0);
         ScrollTrigger.refresh();
@@ -556,10 +408,9 @@ export default function AwakeningFilm() {
 
     return () => {
       disposed = true;
-      full.forEach((b) => b.close());
-      keys.forEach((b) => b.close());
-      full.clear();
-      keys.clear();
+      sequence.dispose();
+      io.disconnect();
+      document.removeEventListener('visibilitychange', updateActivity);
       stageState.awakeningOpaque = false;
       ro.disconnect();
       gsap.ticker.remove(tick);
@@ -585,11 +436,14 @@ export default function AwakeningFilm() {
           className="awakening-poster"
           src={`${import.meta.env.BASE_URL}film/awakening.jpg`}
           alt=""
+          fetchPriority="high"
+          width={1280}
+          height={718}
           aria-hidden="true"
         />
         </picture>
-        <canvas ref={canvasRef} className="awakening-canvas" />
-        <canvas ref={maskRef} className="awakening-mask" />
+        <canvas ref={canvasRef} className="awakening-canvas" aria-hidden="true" />
+        <canvas ref={maskRef} className="awakening-mask" aria-hidden="true" />
         <MobileAwakeningAccents />
         <div className="film-grain" />
         <div ref={strandsRef} className="awakening-strands" aria-hidden="true">

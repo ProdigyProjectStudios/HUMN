@@ -11,8 +11,7 @@ import {
   clamp,
   easeOut,
 } from './config';
-import { createPainter } from './render';
-import { createWorld } from './gl/world';
+import type { World } from './gl/world';
 import { emitProgress, stageState } from './progressBus';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -38,9 +37,32 @@ export default function Film() {
     const jump = params.get('jump');
     if (jump !== null) window.history.scrollRestoration = 'manual';
 
-    /* WebGL world first; 2D canvas painter as the no-GL fallback */
-    const world = createWorld(canvas, reduced);
-    const painter = world ?? createPainter(canvas, reduced);
+    // Keep the scroll geometry and chapter copy mounted; load the renderer only
+    // as the visitor approaches the handoff. Three.js is not in the entry bundle.
+    let disposed = false;
+    let loading = false;
+    let world: World | null = null;
+    let painter: { paint: (p: number, t: number) => void; resize: () => void } | null = null;
+    const prepareWorld = async () => {
+      if (loading || painter || disposed) return;
+      loading = true;
+      try {
+        const module = await import('./gl/world');
+        if (disposed) return;
+        world = module.createWorld(canvas, reduced);
+        if (world) painter = world;
+        else {
+          const fallback = await import('./render');
+          if (disposed) return;
+          painter = fallback.createPainter(canvas, reduced);
+        }
+        painter.resize();
+        renderFrame(smooth, gsap.ticker.time);
+      } catch (error) {
+        // Chapter copy remains readable even when a renderer chunk cannot load.
+        if (import.meta.env.DEV) console.warn('[humn] Renderer unavailable', error);
+      }
+    };
     const onMove = (e: PointerEvent) => {
       world?.setMouse(
         (e.clientX / window.innerWidth) * 2 - 1,
@@ -52,7 +74,7 @@ export default function Film() {
       }
     };
     const onLeave = () => world?.setPointer(null);
-    if (world) {
+    if (!reduced && !touch) {
       window.addEventListener('pointermove', onMove, { passive: true });
       document.documentElement.addEventListener('mouseleave', onLeave);
       window.addEventListener('blur', onLeave);
@@ -60,20 +82,17 @@ export default function Film() {
 
     /* — Lenis smooth scroll wired into GSAP's ticker — */
     let lenis: Lenis | null = null;
-    if (!reduced && jump === null) {
+    const lenisTick = (time: number) => lenis?.raf(time * 1000);
+    if (!reduced && !touch && jump === null) {
       lenis = new Lenis({
         lerp: 0.1,
         smoothWheel: true,
-        /* touch too: native touch scrolling stops dead the moment the finger
-           lifts; letting Lenis carry it gives the swipe a glide-out, like
-           the wheel already has */
-        syncTouch: true,
-        syncTouchLerp: 0.09,
-        touchInertiaExponent: 1.9,
+        // Native touch momentum avoids competing scroll controllers on iOS.
+        syncTouch: false,
+        anchors: true,
       });
       (window as unknown as { __lenis?: Lenis }).__lenis = lenis;
       lenis.on('scroll', ScrollTrigger.update);
-      const lenisTick = (time: number) => lenis!.raf(time * 1000);
       gsap.ticker.add(lenisTick);
       gsap.ticker.lagSmoothing(0);
     }
@@ -88,8 +107,9 @@ export default function Film() {
     const io = new IntersectionObserver(
       (es) => {
         onScreen = es[0].isIntersecting;
+        if (onScreen && !document.hidden && window.scrollY > 0) void prepareWorld();
       },
-      { rootMargin: '50% 0px 50% 0px' },
+      { rootMargin: '100% 0px 100% 0px' },
     );
     io.observe(driver);
     const st = ScrollTrigger.create({
@@ -127,7 +147,7 @@ export default function Film() {
     let domP = NaN;
     let domT = NaN;
     function renderFrame(p: number, t: number) {
-      painter.paint(p, t);
+      if (!document.hidden) painter?.paint(p, t);
       /* the WebGL world animates every frame; the page copy only changes when
          the scroll does, so skip all style writes while the visitor is still */
       if (p === domP && target === domT) return;
@@ -206,6 +226,8 @@ export default function Film() {
     };
 
     const tick = (time: number) => {
+      if (document.hidden) return;
+      if (onScreen && window.scrollY > 0) void prepareWorld();
       if (import.meta.env.DEV) jankTick();
       smooth += (target - smooth) * (reduced ? 1 : touch ? 0.34 : 0.14);
       if (Math.abs(target - smooth) < 1e-6) smooth = target;
@@ -214,17 +236,21 @@ export default function Film() {
         !stageState.awakeningOpaque &&
         (active || Math.abs(target - smooth) > 1e-5)
       ) {
-        renderFrame(smooth, time);
+        if (!reduced || smooth !== domP || target !== domT) renderFrame(smooth, time);
       }
     };
     gsap.ticker.add(tick);
 
     /* resize */
-    const ro = new ResizeObserver(() => painter.resize());
+    const ro = new ResizeObserver(() => {
+      painter?.resize();
+      domP = NaN;
+    });
     ro.observe(canvas);
 
     /* — dev contract: ?jump=<y> lands pre-scrolled and force-settled — */
     const ready = () => {
+      if (disposed) return;
       if (jump !== null) {
         window.scrollTo(0, Number(jump) || 0);
         ScrollTrigger.refresh();
@@ -240,12 +266,14 @@ export default function Film() {
     else ready();
 
     return () => {
+      disposed = true;
       ro.disconnect();
       io.disconnect();
       gsap.ticker.remove(tick);
+      gsap.ticker.remove(lenisTick);
       st.kill();
       lenis?.destroy();
-      if (world) {
+      if (!reduced && !touch) {
         window.removeEventListener('pointermove', onMove);
         document.documentElement.removeEventListener('mouseleave', onLeave);
         window.removeEventListener('blur', onLeave);
@@ -264,7 +292,7 @@ export default function Film() {
       id="layer-film"
     >
       <div className="film-stage">
-        <canvas ref={canvasRef} className="film-canvas" />
+        <canvas ref={canvasRef} className="film-canvas" aria-hidden="true" />
         <div ref={vignetteRef} className="film-vignette" />
         <div ref={grainRef} className="film-grain" />
 

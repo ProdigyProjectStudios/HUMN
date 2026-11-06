@@ -26,7 +26,7 @@ export default function Header() {
         lastIdx = idx;
         chapterRef.current.textContent = `0${idx + 1} \u2014 ${CHAPTERS[idx].label}`;
       }
-      if (barRef.current) barRef.current.style.width = `${local * 100}%`;
+      if (barRef.current) barRef.current.style.transform = `scaleX(${local})`;
       apply();
     });
 
@@ -53,7 +53,10 @@ export default function Header() {
     const lenis = (window as unknown as { __lenis?: { scrollTo: (t: string, o?: object) => void } })
       .__lenis;
     if (lenis) lenis.scrollTo('#access', { duration: 1.8 });
-    else document.getElementById('access')?.scrollIntoView({ behavior: 'smooth' });
+    else document.getElementById('access')?.scrollIntoView({
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+    });
+    document.getElementById('access')?.focus({ preventScroll: true });
   };
 
   return (

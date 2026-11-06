@@ -24,9 +24,12 @@ export default function Cursor() {
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    if (!window.matchMedia('(pointer: fine)').matches) return;
+    if (!window.matchMedia('(pointer: fine)').matches ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const cv = ref.current!;
-    const ctx = cv.getContext('2d')!;
+    const context = cv.getContext('2d');
+    if (!context) return;
+    const ctx = context;
     const html = document.documentElement;
     html.classList.add('has-cursor');
 
