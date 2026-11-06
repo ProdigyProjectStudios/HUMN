@@ -39,6 +39,7 @@ const STATS = [
 
 export default function AfterFilm() {
   useEffect(() => {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     /* arrival motion — after the film's triggers exist (creation order law) */
     const io = new IntersectionObserver(
       (es) =>
@@ -64,11 +65,13 @@ export default function AfterFilm() {
 
     /* counters — once, snapped */
     const triggers: ScrollTrigger[] = [];
+    const tweens: gsap.core.Tween[] = [];
     document.querySelectorAll<HTMLElement>('[data-count]').forEach((el) => {
       const to = Number(el.dataset.count);
       const decimals = Number(el.dataset.decimals || 0);
       const prefix = el.dataset.prefix || '';
       const suffix = el.dataset.suffix || '';
+      if (reduced) return;
       const obj = { v: 0 };
       const tween = gsap.to(obj, {
         v: to,
@@ -79,6 +82,7 @@ export default function AfterFilm() {
           el.textContent = `${prefix}${obj.v.toFixed(decimals)}${suffix}`;
         },
       });
+      tweens.push(tween);
       const trig = ScrollTrigger.create({
         trigger: el,
         start: 'top 88%',
@@ -106,6 +110,7 @@ export default function AfterFilm() {
       io.disconnect();
       idle.disconnect();
       triggers.forEach((t) => t.kill());
+      tweens.forEach((t) => t.kill());
     };
   }, []);
 
@@ -118,7 +123,7 @@ export default function AfterFilm() {
         <i className="au au--ember" />
       </div>
 
-      <section className="section manifesto" id="manifesto">
+      <section className="section manifesto" id="manifesto" tabIndex={-1}>
         <div className="wrap">
           <p className="eyebrow">Manifesto</p>
           <p className="lede">
@@ -170,7 +175,7 @@ export default function AfterFilm() {
                   data-suffix={s.suffix}
                 >
                   {s.prefix}
-                  {(0).toFixed(s.decimals)}
+                  {s.to.toFixed(s.decimals)}
                   {s.suffix}
                 </div>
                 <div className="lbl">{s.label}</div>
@@ -180,7 +185,7 @@ export default function AfterFilm() {
         </div>
       </section>
 
-      <section className="section access" id="access">
+      <section className="section access" id="access" tabIndex={-1}>
         <div className="access-halo" aria-hidden="true" />
         <div className="wrap">
           <p className="eyebrow" style={{ justifyContent: 'center' }}>

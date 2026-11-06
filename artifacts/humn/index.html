@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HUMN — Evolving Human Intelligence</title>
     <meta name="description" content="HUMN Thread is a non-invasive neural interface: a 14-gram band worn behind the ear, with a personal AI that extends your memory, speed and judgment. No implant. No surgery." />
     <meta name="robots" content="index, follow" />
@@ -18,16 +18,13 @@
     <meta name="twitter:title" content="HUMN — Evolving Human Intelligence" />
     <meta name="twitter:description" content="The first neural interface that needs no implant. It learns how you think, then helps you think further." />
     <meta name="twitter:image" content="https://humn.digitalprodigy.dev/og.jpg" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- the opening title and tagline fonts, fetched early so the intro never swaps fonts mid-animation -->
-    <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/intertight/v9/NGSwv5HMAFg6IuGlBNMjxLsH8ag.woff2" />
-    <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/ibmplexmono/v20/-F63fjptAgt5VM-kVkqdyU8n1i8q1w.woff2" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=IBM+Plex+Mono:wght@400;500&family=Inter+Tight:ital,wght@0,300..600;1,300..600&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
+    <meta name="theme-color" content="#05070b" />
+    <link rel="preload" as="image" href="%BASE_URL%film/awakening.jpg" media="(min-width: 768px) and (min-aspect-ratio: 9/10)" fetchpriority="high" />
+    <link rel="preload" as="image" href="%BASE_URL%film/awakening/f301.webp" media="(max-width: 767px), (max-aspect-ratio: 9/10)" fetchpriority="high" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="%BASE_URL%fonts/inter-tight-normal.woff2" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="%BASE_URL%fonts/ibm-plex-mono-normal-400.woff2" />
+    <link rel="stylesheet" href="%BASE_URL%fonts/fonts.css" />
   </head>
   <body>
     <div id="root"></div>
