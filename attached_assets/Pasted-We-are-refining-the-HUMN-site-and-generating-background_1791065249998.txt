@@ -1,0 +1,79 @@
+We are refining the HUMN site and generating background video plates in Artlist / Seedance for the existing scroll-film.
+Your job is to help me:
+1. understand the visual direction clearly,
+2. choose the best reference images,
+3. write strong Artlist / Seedance prompts,
+4. and later help wire the generated video into the current HUMN build.
+Core goal
+Preserve the existing center DNA strand animation already in the HUMN site.
+Do not replace that center strand.
+The generated video should live around it, mainly on the left and right sides of the frame, so the current center DNA strand remains the hero anchor.
+Visual concept
+HUMN = human DNA meets AI superintelligence.
+The background video should show:
+- left side = human / biological / organic / fluid / warm / amber / subtle cellular or DNA energy
+- right side = AI / machine intelligence / digital / precise / icy blue / elegant computational energy
+- both sides gradually converging toward the center
+- the convergence should feel like human intelligence and artificial intelligence merging
+- the motion should feel calm, premium, cinematic, sophisticated, and refined
+- not noisy, not chaotic, not cheesy sci-fi
+Important composition rule
+The middle of the frame is already occupied by the existing HUMN center strand animation.
+So the video should be designed to support the center, not clutter it.
+Think of it as:
+- the current center strand remains intact
+- organic intelligence flows in from the left
+- digital intelligence flows in from the right
+- both streams visually enrich the center strand
+- over time, the two sides begin to feel more unified
+Desired feel
+- deep cosmic / galaxy atmosphere
+- elegant negative space
+- refined transhumanism
+- premium tech brand
+- minimal but emotionally powerful
+- smooth, fluid, slow motion
+Avoid
+- visual chaos
+- too many objects
+- cluttered sci-fi effects
+- explosions
+- hard cuts
+- obvious stock-video feel
+- cheesy HUD overlays
+- anything that competes too much with the center DNA strand
+What I need from you now
+1. review the reference images I provide
+2. tell me which references are strongest
+3. write 3 strong Seedance prompts:
+   - one for the opening / bedrock section
+   - one for the convergence / mid section
+   - one for the unified / enriched section
+4. keep the prompts optimized for Artlist / Seedance
+5. recommend whether each prompt should be:
+   - subtle
+   - medium intensity
+   - or more cinematic
+Technical note
+For now, we are generating background plates only.
+No text, no UI, no logos inside the video.
+The site UI and copy will remain in the actual HUMN build.
+First, ask me to upload / attach the current HUMN screenshot and the GPT-generated reference images, then help me choose the best ones before writing the final video prompts.
+
+Then send Replit this right after
+If it needs more context, send this too:
+Important clarification:
+I do not want the video to generate a brand-new center composition.
+The current center strand / DNA animation already exists in the site and should remain the main anchor.
+The generated video should mainly enhance the left and right sides of the screen and visually converge toward the center, so it feels like human biology and AI intelligence are merging into the existing strand.
+
+Short Artlist prompt structure Replit should produce
+Tell Replit to aim for prompts like this:
+Opening / Bedrock
+Deep cosmic background, elegant and minimal, dark navy-black space with subtle stars and atmospheric depth. Left side shows warm organic amber biological energy, fluid and DNA-like. Right side shows cool icy-blue digital intelligence, precise and luminous. Both remain separated but subtly drawn toward the center. Calm, premium, cinematic motion. No text, no logo, no UI.
+
+Mid / Convergence
+Deep cosmic premium background plate. Warm organic amber intelligence on the left and cool icy-blue digital intelligence on the right begin flowing inward toward the center. The two sides partially braid and interact, suggesting human DNA merging with AI superintelligence. Motion is fluid, refined, slow, elegant, and visually restrained. No text, no logo, no UI.
+
+Final / Unified
+Premium futuristic cosmic background plate. Organic amber and digital blue energies have largely merged into a more unified luminous system around the center, suggesting transhuman intelligence and enriched DNA. The image feels calm, elevated, elegant, and sophisticated, with subtle galaxy atmosphere and minimal clutter. No text, no logo, no UI.

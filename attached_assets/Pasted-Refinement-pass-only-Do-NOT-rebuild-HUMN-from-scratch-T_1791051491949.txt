@@ -1,0 +1,75 @@
+Refinement pass only. Do NOT rebuild HUMN from scratch.
+
+The current build has strong ideas, but the experience is still too visually busy and too jarring in the early chapters. I want a calmer, more refined, more luxurious version of the same concept.
+
+Keep:
+- the overall STRATA × CORRECTION concept
+- the scroll structure
+- the deep-space / galaxy-like substrate behind the main visual system
+- the transformation from cold machine intelligence into warm human-grade intelligence
+- the gold moments and signature light-thread
+- the existing chapter logic and content
+
+Change the art direction in the following way:
+
+1. CALM THE HERO / OPENING
+The first chapters are doing too much.
+Reduce visual noise, reduce competing effects, reduce clutter.
+Make the opening feel more controlled, elegant, and expensive.
+The first impression should feel serene, sharp, and sophisticated — not chaotic.
+
+2. REFINED BEDROCK / CONTEXT VISUAL LANGUAGE
+I like the underlying deep navy / near-black / galaxy-like environment.
+Keep that substrate.
+But simplify the foreground visual treatment.
+I want a more refined “DNA / intelligence strand” feel:
+- cleaner thread behavior
+- fewer distracting background elements
+- more elegant spacing
+- more restraint
+- subtler motion
+- less obvious “effect stacking”
+
+3. MAKE THE EXPERIENCE CALMER OVERALL
+Every chapter should feel smoother and more composed.
+Use slower, more confident motion.
+Reduce anything that feels twitchy, noisy, or overly dramatic.
+Aim for a premium, cinematic calm.
+
+4. MAKE CHAPTER TRANSITIONS / PAGE BREAKS ALMOST INVISIBLE
+Right now there are visible seams / breaks in places.
+I want the entire pinned film to feel like one continuous environment.
+Chapter boundaries should be nearly imperceptible.
+Avoid obvious horizontal break lines or surfaces that feel like accidental page splits.
+The world should flow continuously.
+
+5. KEEP THE GOLD, BUT WITH REFINEMENT
+The gold moments are strong.
+Do not remove them.
+But make them feel more elegant and integrated.
+The palette transition from blue/navy to warm gold should feel gradual and natural, not like two different art directions.
+
+6. IMPROVE SPATIAL COHESION
+The entire film should feel like one world transforming, not several separate scenes.
+Preserve the galaxy-like depth in the background.
+Use the thread/light system as the unifying visual element throughout.
+
+7. REDESIGN THE HUMN LOGO / MARK
+The current logo is not refined enough.
+Create a thinner, sharper, more elegant HUMN mark:
+- fine-line construction
+- precise geometry
+- subtle, premium feel
+- sharp edges
+- minimal
+- feels like a luxury tech mark, not a generic icon
+
+8. PRIORITIZE RESTRAINT
+This should feel more “high-end creative studio” and less “AI showing off.”
+If in doubt, simplify.
+Less but better.
+
+Do not add video.
+Do not change the core concept.
+Do not destroy what is already working.
+This is a luxury refinement pass focused on calm, cohesion, elegance, and invisible transitions.

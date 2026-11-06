@@ -1,0 +1,668 @@
+/* ————————————————————————— After-film sections —————————————————————————
+   One continuous dark field from the end of the film to the footer: deep ink
+   lit by slow-drifting ice and amber light, so section boundaries never show. */
+
+.after {
+  position: relative;
+  z-index: 3;
+  overflow: hidden;
+  isolation: isolate;
+  /* slides up over the film's final dark frames (which settle to exactly
+     --ink), so the manifesto is already on screen the moment it goes dark */
+  margin-top: -70vh;
+  background: linear-gradient(to bottom, rgba(5, 7, 11, 0) 0, var(--ink) 70vh);
+  color: var(--cream);
+}
+
+/* faint dot matrix, faded at every edge */
+.after::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(rgba(191, 224, 245, 0.16) 1px, transparent 1.4px);
+  background-size: 30px 30px;
+  mask-image: radial-gradient(70% 45% at 50% 50%, #000 0%, transparent 100%);
+  -webkit-mask-image: radial-gradient(70% 45% at 50% 50%, #000 0%, transparent 100%);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.after-aurora {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+}
+
+.au {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  will-change: transform;
+}
+
+.au--ice {
+  top: 4%;
+  left: -12%;
+  width: 62vw;
+  height: 62vw;
+  background: radial-gradient(closest-side, rgba(143, 184, 220, 0.16) 0%, rgba(143, 184, 220, 0.1376) 18%, rgba(143, 184, 220, 0.096) 36%, rgba(143, 184, 220, 0.0544) 54%, rgba(143, 184, 220, 0.024) 70%, rgba(143, 184, 220, 0.008) 84%, rgba(143, 184, 220, 0.0) 100%);
+  animation: au-drift-a 26s ease-in-out infinite alternate;
+}
+
+.au--amber {
+  top: 30%;
+  right: -16%;
+  width: 58vw;
+  height: 58vw;
+  background: radial-gradient(closest-side, rgba(240, 190, 130, 0.13) 0%, rgba(240, 190, 130, 0.1118) 18%, rgba(240, 190, 130, 0.078) 36%, rgba(240, 190, 130, 0.0442) 54%, rgba(240, 190, 130, 0.0195) 70%, rgba(240, 190, 130, 0.0065) 84%, rgba(240, 190, 130, 0.0) 100%);
+  animation: au-drift-b 32s ease-in-out infinite alternate;
+}
+
+.au--deep {
+  top: 52%;
+  left: 8%;
+  width: 70vw;
+  height: 50vw;
+  background: radial-gradient(closest-side, rgba(70, 110, 160, 0.16) 0%, rgba(70, 110, 160, 0.1376) 18%, rgba(70, 110, 160, 0.096) 36%, rgba(70, 110, 160, 0.0544) 54%, rgba(70, 110, 160, 0.024) 70%, rgba(70, 110, 160, 0.008) 84%, rgba(70, 110, 160, 0.0) 100%);
+  animation: au-drift-a 38s ease-in-out infinite alternate-reverse;
+}
+
+.au--ember {
+  bottom: 3%;
+  left: 30%;
+  width: 52vw;
+  height: 52vw;
+  background: radial-gradient(closest-side, rgba(224, 154, 95, 0.14) 0%, rgba(224, 154, 95, 0.1204) 18%, rgba(224, 154, 95, 0.084) 36%, rgba(224, 154, 95, 0.0476) 54%, rgba(224, 154, 95, 0.021) 70%, rgba(224, 154, 95, 0.007) 84%, rgba(224, 154, 95, 0.0) 100%);
+  animation: au-drift-b 30s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes au-drift-a {
+  to {
+    transform: translate3d(8vw, 4vh, 0) scale(1.12);
+  }
+}
+
+@keyframes au-drift-b {
+  to {
+    transform: translate3d(-7vw, -5vh, 0) scale(0.92);
+  }
+}
+
+.section {
+  position: relative;
+  min-height: min(92vh, 900px);
+  display: flex;
+  align-items: center;
+  padding: clamp(4rem, 10vh, 8rem) 0;
+}
+
+.section .wrap > * {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.9s var(--ease-out),
+    transform 0.9s var(--ease-out);
+}
+
+.section.in .wrap > * {
+  opacity: 1;
+  transform: none;
+}
+
+.section.in .wrap > *:nth-child(2) {
+  transition-delay: 0.09s;
+}
+.section.in .wrap > *:nth-child(3) {
+  transition-delay: 0.18s;
+}
+.section.in .wrap > *:nth-child(4) {
+  transition-delay: 0.27s;
+}
+.section.in .wrap > *:nth-child(5) {
+  transition-delay: 0.36s;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--amber);
+  opacity: 1;
+  margin: 0 0 2.2rem;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 34px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, currentColor);
+}
+
+.section h2 {
+  margin: 0 0 3.2rem;
+  font-family: var(--font-display);
+  font-weight: 440;
+  font-size: clamp(2.4rem, 5vw, 4.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.section h2 em {
+  font-style: italic;
+  font-weight: 340;
+  color: var(--amber);
+}
+
+/* Manifesto — words light up with scroll. Sits at the top of its section
+   and reveals fast, driven by its own trigger (see AfterFilm.tsx). */
+
+.section.manifesto {
+  align-items: flex-start;
+  padding-top: clamp(2rem, 5vh, 3.5rem);
+}
+
+.section.manifesto .wrap > * {
+  transition-duration: 0.55s;
+}
+
+.section.manifesto.in .wrap > *:nth-child(2) {
+  transition-delay: 0.06s;
+}
+
+.manifesto .lede {
+  margin: 0;
+  max-width: 30ch;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.8rem, 3.6vw, 3.3rem);
+  line-height: 1.22;
+  letter-spacing: -0.012em;
+}
+
+.lede-word {
+  color: var(--cream);
+}
+
+/* Capabilities */
+
+.cap-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: clamp(1rem, 3vw, 3rem);
+  align-items: baseline;
+  padding: 1.9rem 0;
+  transition: padding-left 0.5s var(--ease-out);
+}
+
+/* luminous hairline that fades at both ends */
+.cap-row::before,
+.cap-row:last-child::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(143, 184, 220, 0.35),
+    rgba(245, 238, 227, 0.12) 50%,
+    transparent
+  );
+}
+
+.cap-row::before {
+  top: 0;
+}
+
+.cap-row:last-child::after {
+  bottom: 0;
+}
+
+.cap-row:hover {
+  padding-left: 0.8rem;
+}
+
+.cap-idx {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: var(--amber);
+}
+
+.cap-idx::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 10px var(--amber);
+  opacity: 1;
+  transition: opacity 0.4s;
+}
+
+.cap-row:hover .cap-idx::before {
+  opacity: 1;
+}
+
+.cap-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 460;
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
+  line-height: 1.05;
+  color: #fff;
+  transition: color 0.4s;
+}
+
+.cap-row:hover .cap-name {
+  color: var(--amber);
+}
+
+.cap-desc {
+  margin: 0;
+  font-size: clamp(0.92rem, 1.4vw, 1.05rem);
+  line-height: 1.6;
+  color: var(--cream);
+  max-width: 44ch;
+}
+
+@media (max-width: 760px) {
+  /* phones: sections size to their content, no tall empty bands */
+  .section,
+  .access {
+    min-height: 0;
+    padding: 4.5rem 0;
+  }
+  .section h2 {
+    margin-bottom: 2.2rem;
+  }
+  .cap-row {
+    grid-template-columns: 3rem 1fr;
+  }
+  .cap-desc {
+    grid-column: 2;
+  }
+}
+
+/* Specs — glass cells */
+
+.proof-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(0.9rem, 2vw, 1.5rem);
+}
+
+.proof-cell {
+  position: relative;
+  padding: clamp(1.4rem, 2.6vw, 2.2rem);
+  border-radius: 20px;
+  background: linear-gradient(160deg, rgba(191, 224, 245, 0.07), rgba(255, 255, 255, 0.015) 60%);
+  box-shadow:
+    inset 0 0 0 1px rgba(191, 224, 245, 0.1),
+    0 30px 60px rgba(0, 0, 0, 0.35);
+  /* no backdrop blur: only the soft aurora sits behind, so blurring it
+     changed nothing visible but cost a GPU pass every frame it drifted */
+  overflow: hidden;
+}
+
+/* a light catching the top edge of each cell */
+.proof-cell::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 12%;
+  right: 12%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(240, 190, 130, 0.7), transparent);
+}
+
+.proof-cell .num {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 5vw, 4.4rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--amber);
+  font-variant-numeric: tabular-nums lining-nums;
+  white-space: nowrap;
+}
+
+.proof-cell .lbl {
+  margin-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--amber);
+  line-height: 1.7;
+}
+
+@media (max-width: 860px) {
+  .proof-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Access / CTA */
+
+.access {
+  text-align: center;
+  min-height: min(100vh, 960px);
+}
+
+.access-halo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(860px, 120vw);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgba(240, 190, 130, 0.2),
+    rgba(143, 184, 220, 0.07) 55%,
+    transparent
+  );
+  animation: halo-breathe 7s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes halo-breathe {
+  50% {
+    transform: translate(-50%, -50%) scale(1.08);
+    opacity: 0.75;
+  }
+}
+
+.access h2 {
+  margin: 0;
+  font-size: clamp(3rem, 8.4vw, 7.4rem);
+  line-height: 0.98;
+}
+
+.access .sub {
+  margin: 2rem auto 3rem;
+  max-width: 46ch;
+  font-size: clamp(0.98rem, 1.5vw, 1.15rem);
+  line-height: 1.65;
+  color: var(--cream);
+}
+
+.cta-main {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 2.6rem;
+  border-radius: 999px;
+  background: linear-gradient(100deg, #fff4e3, var(--amber));
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.2),
+    0 18px 60px rgba(240, 190, 130, 0.28);
+  transition:
+    transform 0.4s var(--ease-out),
+    box-shadow 0.4s var(--ease-out);
+}
+
+.cta-main::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+  transform: skewX(-18deg);
+  animation: cta-sweep 4.5s var(--ease-soft) infinite;
+}
+
+@keyframes cta-sweep {
+  0%,
+  55% {
+    left: -80%;
+  }
+  100% {
+    left: 130%;
+  }
+}
+
+.cta-main:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.3),
+    0 26px 80px rgba(240, 190, 130, 0.4);
+}
+
+.cta-main:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+.access .fine {
+  margin-top: 2.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+/* Footer */
+
+.site-footer {
+  position: relative;
+  background: var(--ink);
+  color: var(--cream);
+  padding: 3.4rem 0 2.6rem;
+  overflow: hidden;
+}
+
+.foot-top {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding-bottom: 2.4rem;
+}
+
+.foot-top::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(191, 224, 245, 0.22), transparent);
+}
+
+.foot-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: var(--cream);
+}
+
+.foot-brand svg {
+  width: 24px;
+  height: 24px;
+}
+
+.foot-brand .word {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  font-size: 1.1rem;
+}
+
+/* live mark: a pulse climbs the thread, the apex answers with a glow */
+.logo-pulse {
+  stroke-dasharray: 3 30;
+  stroke-dashoffset: 33;
+  filter: drop-shadow(0 0 1.5px #fff);
+  animation: logo-climb 3.2s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+}
+
+@keyframes logo-climb {
+  0% {
+    stroke-dashoffset: 3;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  70% {
+    stroke-dashoffset: -16;
+    opacity: 1;
+  }
+  80%,
+  100% {
+    stroke-dashoffset: -16;
+    opacity: 0;
+  }
+}
+
+.logo-apex {
+  animation: logo-apex 3.2s ease-out infinite;
+}
+
+@keyframes logo-apex {
+  0%,
+  66% {
+    filter: none;
+  }
+  76% {
+    filter: drop-shadow(0 0 3px #fff) drop-shadow(0 0 6px var(--amber));
+  }
+  100% {
+    filter: none;
+  }
+}
+
+.foot-nav {
+  display: flex;
+  gap: 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.foot-nav a {
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+.foot-nav a:hover {
+  color: var(--amber);
+}
+
+.foot-social {
+  display: flex;
+  gap: 1.1rem;
+}
+
+.foot-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(245, 238, 227, 0.2);
+  border-radius: 50%;
+  opacity: 1;
+  transition:
+    opacity 0.3s,
+    border-color 0.3s,
+    transform 0.3s var(--ease-out);
+}
+
+.foot-social a:hover {
+  color: var(--amber);
+  border-color: var(--amber);
+  transform: translateY(-2px);
+}
+
+/* giant wordmark with a slow band of light moving through it */
+.foot-mark {
+  margin: clamp(2rem, 5vw, 3.5rem) 0 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(5rem, 24vw, 22rem);
+  line-height: 0.85;
+  letter-spacing: 0.06em;
+  text-align: center;
+  user-select: none;
+  background: linear-gradient(
+      100deg,
+      rgba(255, 250, 240, 0) 34%,
+      rgba(255, 250, 240, 0.85) 50%,
+      rgba(255, 250, 240, 0) 66%
+    ),
+    linear-gradient(var(--amber), var(--amber));
+  background-size:
+    250% 100%,
+    100% 100%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: mark-sweep 7s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+}
+
+@keyframes mark-sweep {
+  0% {
+    background-position:
+      120% 0,
+      0 0;
+  }
+  60%,
+  100% {
+    background-position:
+      -20% 0,
+      0 0;
+  }
+}
+
+.foot-base {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-top: 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .au,
+  .access-halo,
+  .cta-main::after,
+  .logo-pulse,
+  .logo-apex,
+  .foot-mark {
+    animation: none;
+  }
+}
+

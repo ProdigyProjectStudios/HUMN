@@ -1,0 +1,72 @@
+{
+  "name": "humn-confluence-desktop",
+  "aspect": "16:9",
+  "vector": "The camera only ever rises, ascending slowly and steadily along the central strand from first frame to last.",
+  "vector_direction": "out",
+  "style": "Wide 16:9 cinematic frame. Deep-space substrate: ink-black void (#05070B) with very faint galactic dust and a distant, barely-there nebula. A single slender luminous strand runs perfectly vertical at exact horizontal centre, spanning the full frame height. Restrained, calm, premium; macro-photography realism, soft anamorphic falloff, fine film grain, at least 70 percent of the frame near-black until the final light. Palette only: machine ice #8FB8DC, signal #BFE0F5, ember #E09A5F, amber #F0BE82, cream #F5EEE3. Absolutely no text, no UI, no logos, no faces, no robots, no circuit boards, no holograms, no lightning, no sparks, no lens-flare streaks, no grid lines, no horizontal lines or bands, no hard edges anywhere.",
+  "keyframes": [
+    {
+      "id": "kf0-bedrock",
+      "chapter": "BEDROCK",
+      "scroll_p": 0.0,
+      "prompt": "Centre: a slender vertical double helix of light, one fine strand cool ice-blue and one fine strand warm amber, twisting slowly, joined by a dense ladder of very faint hair-thin rungs. Left third (roughly 8 to 28 percent of the width): an organic intelligence stream, a slow laminar river of luminous amber and ember fluid, like ink diffusing in still water or a bioluminescent current, soft, smoky, flowing upward. Right third (roughly 72 to 92 percent of the width): a machine intelligence stream, thousands of tiny ice-blue points flowing upward in precise parallel filaments, glassy and crystalline, ordered but fluid. Wide calm dark gaps separate both streams from the helix."
+    },
+    {
+      "id": "kf1-context",
+      "chapter": "CONTEXT",
+      "scroll_p": 0.19,
+      "prompt": "The same world a little higher along the strand. The left amber stream has grown fine dendritic tributaries, like a river delta seen from orbit or branching neurons, holding memory. The right ice-blue stream has organised into braided parallel filaments punctuated by small, softly glowing nodes. Sparse hair-fine tendrils reach from each stream and lightly touch the helix. The helix twist is slightly looser. The streams now sit at roughly 14 to 32 percent and 68 to 86 percent of the width; the dark gaps are narrower but still calm."
+    },
+    {
+      "id": "kf2-tone-nuance",
+      "chapter": "TONE / NUANCE",
+      "scroll_p": 0.43,
+      "prompt": "The same world higher still. The two streams have drifted to the centre and now sit at roughly 26 to 42 percent and 58 to 74 percent of the width. Their colours are exchanging: thin ice-blue filaments thread through the amber organic stream, and warm amber motes travel within the ice-blue machine stream. Each stream keeps its own texture, smoky fluid on the left and fine ordered points on the right. The central helix has relaxed; its two strands run almost parallel with only a gentle wave. A faint warm haze sits low in the depth of space."
+    },
+    {
+      "id": "kf3-trust",
+      "chapter": "TRUST",
+      "scroll_p": 0.68,
+      "prompt": "The same world higher again. Both streams have met the central strand and wrap around it in a slow, elegant braid: one vertical column, about 20 percent of the frame wide, of intertwined amber fluid and ice-blue particle filaments around a bright fine core thread. Slightly below centre, a single soft round node of warm white light sits on the core thread, glowing calmly. The space around the column is darker and quieter, the outer thirds of the frame almost empty."
+    },
+    {
+      "id": "kf4-surface",
+      "chapter": "SURFACE",
+      "scroll_p": 0.85,
+      "prompt": "The same world, near the top of the ascent. The braid has fused into one unified intelligence: a single slender luminous column, about 10 percent of the frame wide, made of one seamless iridescent material, a warm white-gold core with fine ice-blue and amber veins flowing within it, fully integrated rather than two colours side by side. The node of light has swelled into a broad, soft radiance centred on the column, gently warming the nebula to dusk amber at the frame edges. Still deep space, still calm."
+    },
+    {
+      "id": "kf5-light",
+      "chapter": "SURFACE (resolve)",
+      "scroll_p": 0.97,
+      "prompt": "The same world at the very top. The radiance of the unified column has bloomed until soft warm cream light (#F5EEE3) fills most of the frame; the column's silhouette is faintly visible at the exact centre, dissolving into the light. The outermost edges keep a gentle warm sand tone that fades into the cream with no visible boundary. Serene, luminous, resolved."
+    }
+  ],
+  "clips": [
+    {
+      "id": "c1-bedrock",
+      "duration": 5,
+      "prompt": "Continue the exact same shot from the reference frame, identical framing, identical colour grade. The camera rises slowly and steadily upward along the central double helix, which stays perfectly vertical at frame centre while it turns gently. On the left, the warm organic stream keeps flowing upward and begins to branch, unfolding fine dendritic tributaries; on the right, the cool machine stream organises its particles as braided parallel filaments with small glowing nodes. Hair-fine tendrils from both streams begin to reach for the helix. Calm, weightless, unhurried motion. One single unbroken shot, no cuts."
+    },
+    {
+      "id": "c2-context-tone",
+      "duration": 5,
+      "prompt": "Continue the exact same shot from the reference frame, identical framing, identical colour grade. The camera keeps rising upward at the same steady speed along the central strand. Both side streams drift gradually to the centre, halving the dark gap on each side. Their colours begin to exchange: thin ice-blue filaments thread through the amber stream while warm amber motes travel within the blue stream. The helix relaxes its twist until its two strands run almost parallel. Calm, weightless, unhurried motion. One single unbroken shot, no cuts."
+    },
+    {
+      "id": "c3-nuance-trust",
+      "duration": 5,
+      "prompt": "Continue the exact same shot from the reference frame, identical framing, identical colour grade. The camera continues rising upward at the same steady speed. The two streams reach the central strand and wrap around it in a slow, elegant braid, forming one column of intertwined amber fluid and ice-blue filaments around a bright core thread. A single soft node of warm white light gathers on the core thread and slowly brightens. The outer thirds of the frame grow calmer and darker. Calm, weightless, unhurried motion. One single unbroken shot, no cuts."
+    },
+    {
+      "id": "c4-trust-surface",
+      "duration": 5,
+      "prompt": "Continue the exact same shot from the reference frame, identical framing, identical colour grade. The camera continues its steady upward rise. The braid tightens and fuses: amber and ice currents dissolve through each other until the column becomes one seamless iridescent material, a warm white-gold core with fine ice-blue and amber veins flowing within. The node of light swells smoothly, becoming a broad, soft radiance that gently warms the nebula at the frame edges. Calm, weightless, unhurried motion. One single unbroken shot, no cuts."
+    },
+    {
+      "id": "c5-surface-light",
+      "duration": 5,
+      "prompt": "Continue the exact same shot from the reference frame, identical framing, identical colour grade at the start. The camera keeps rising upward, slower now, easing to rest. The radiance of the unified column blooms outward smoothly and evenly until soft warm cream light fills most of the frame, the column's silhouette gently dissolving within it. No flash, no burst, no rays; a slow, even swell of light. One single unbroken shot, no cuts."
+    }
+  ]
+}

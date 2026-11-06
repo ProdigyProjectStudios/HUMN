@@ -1,0 +1,3 @@
+- [HUMN creative direction](humn-direction.md) — Product = HUMN Thread neural interface; video film then DNA strand film (6 chapters: lineage → faculties → Evolve); no overlays on face.
+- [Verifying WebGL in this workspace](webgl-verification.md) — Screenshot tool has no WebGL; use puppeteer + SwiftShader chromium recipe. Backgrounded tabs cause long rAF spikes.
+- [Firefox perf](firefox-perf.md) — Avoid CSS gradient/mask/blend over live canvas; Firefox lite path and headless measurement.

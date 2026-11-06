@@ -1,0 +1,587 @@
+/* ————————————————————————— The film ————————————————————————— */
+
+.film-driver {
+  position: relative;
+  height: 760vh;
+  background: var(--ink);
+}
+
+.film-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  /* phones: the address bar collapsing grows the viewport past svh, which
+     left an ink-less strip (the strand below showing through) at the bottom;
+     dvh tracks the visible height exactly */
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+.film-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* the awakening shot: poster under a canvas that draws the scrubbed frames */
+.awakening-poster,
+.awakening-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* sized and placed in JS to just the on-screen part of the frame */
+.awakening-canvas {
+  inset: auto;
+}
+/* static ink + edge dissolves + vignette over the frame (AwakeningFilm.tsx
+   paintMask); shown once the first frame is drawn */
+.awakening-mask {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  visibility: hidden;
+}
+@media (max-width: 767px), (max-aspect-ratio: 9/10) {
+  .awakening .hero,
+  .awakening .hero-cue {
+    display: none;
+  }
+}
+
+/* the poster sits exactly where the canvas draws the frame and dissolves
+   the same way (AwakeningFilm.tsx frameCssWidth / EDGE_*): near the
+   footage's real size, never stretched to cover the screen */
+.awakening-poster {
+  inset: auto;
+  top: 50%;
+  left: 50%;
+  width: min(1280px, 72vw, calc(80vh * 1280 / 718));
+  width: min(1280px, 72vw, calc(80svh * 1280 / 718));
+  height: auto;
+  aspect-ratio: 1280 / 718;
+  transform: translate(-50%, -50%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.07) 4.5%, rgba(0, 0, 0, 0.26) 9.6%, rgba(0, 0, 0, 0.52) 15%, rgba(0, 0, 0, 0.76) 20.4%, rgba(0, 0, 0, 0.92) 25.2%, #000 30%, #000 62%, rgba(0, 0, 0, 0.92) 68.1%, rgba(0, 0, 0, 0.76) 74.2%, rgba(0, 0, 0, 0.52) 81%, rgba(0, 0, 0, 0.26) 87.8%, rgba(0, 0, 0, 0.07) 94.3%, transparent 100%),
+    linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.07) 3.6%, rgba(0, 0, 0, 0.26) 7.7%, rgba(0, 0, 0, 0.52) 12%, rgba(0, 0, 0, 0.76) 16.3%, rgba(0, 0, 0, 0.92) 20.2%, #000 24%, #000 76%, rgba(0, 0, 0, 0.92) 79.8%, rgba(0, 0, 0, 0.76) 83.7%, rgba(0, 0, 0, 0.52) 88%, rgba(0, 0, 0, 0.26) 92.3%, rgba(0, 0, 0, 0.07) 96.4%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.07) 4.5%, rgba(0, 0, 0, 0.26) 9.6%, rgba(0, 0, 0, 0.52) 15%, rgba(0, 0, 0, 0.76) 20.4%, rgba(0, 0, 0, 0.92) 25.2%, #000 30%, #000 62%, rgba(0, 0, 0, 0.92) 68.1%, rgba(0, 0, 0, 0.76) 74.2%, rgba(0, 0, 0, 0.52) 81%, rgba(0, 0, 0, 0.26) 87.8%, rgba(0, 0, 0, 0.07) 94.3%, transparent 100%),
+    linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.07) 3.6%, rgba(0, 0, 0, 0.26) 7.7%, rgba(0, 0, 0, 0.52) 12%, rgba(0, 0, 0, 0.76) 16.3%, rgba(0, 0, 0, 0.92) 20.2%, #000 24%, #000 76%, rgba(0, 0, 0, 0.92) 79.8%, rgba(0, 0, 0, 0.76) 83.7%, rgba(0, 0, 0, 0.52) 88%, rgba(0, 0, 0, 0.26) 92.3%, rgba(0, 0, 0, 0.07) 96.4%, transparent 100%);
+  mask-composite: intersect;
+}
+
+@media (max-aspect-ratio: 9/10) {
+  .awakening-poster {
+    width: 170vw;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.07) 4.5%, rgba(0, 0, 0, 0.26) 9.6%, rgba(0, 0, 0, 0.52) 15%, rgba(0, 0, 0, 0.76) 20.4%, rgba(0, 0, 0, 0.92) 25.2%, #000 30%, #000 62%, rgba(0, 0, 0, 0.92) 68.1%, rgba(0, 0, 0, 0.76) 74.2%, rgba(0, 0, 0, 0.52) 81%, rgba(0, 0, 0, 0.26) 87.8%, rgba(0, 0, 0, 0.07) 94.3%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.07) 4.5%, rgba(0, 0, 0, 0.26) 9.6%, rgba(0, 0, 0, 0.52) 15%, rgba(0, 0, 0, 0.76) 20.4%, rgba(0, 0, 0, 0.92) 25.2%, #000 30%, #000 62%, rgba(0, 0, 0, 0.92) 68.1%, rgba(0, 0, 0, 0.76) 74.2%, rgba(0, 0, 0, 0.52) 81%, rgba(0, 0, 0, 0.26) 87.8%, rgba(0, 0, 0, 0.07) 94.3%, transparent 100%);
+  }
+}
+
+/* side DNA strands on the opening screen (sideStrands.ts); landscape only */
+.awakening-strands {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.awakening-strands canvas {
+  position: absolute;
+  top: 0;
+  display: none;
+}
+@media (max-aspect-ratio: 9/10) {
+  .awakening-strands {
+    display: none;
+  }
+}
+
+/* overlap: the awakening driver sits above the strand driver, whose first
+   AWAKENING_XFADE_VH (config.ts) slides under it so both stages are pinned
+   together while the awakening dissolves. Keep the 50vh in step with it. */
+.film-driver.awakening {
+  z-index: 2;
+  background: transparent;
+}
+
+.film-driver.awakening + .film-driver {
+  z-index: 1;
+  margin-top: calc(-100svh - 50vh);
+}
+
+/* vignette + grain + seam fade live above the canvas, below the copy */
+.film-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    120% 90% at 50% 46%,
+    transparent 52%,
+    rgba(4, 4, 5, 0.5) 100%
+  );
+}
+
+.film-grain {
+  position: absolute;
+  inset: -2%;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 240px 240px;
+}
+
+.film-seam {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--ink);
+  opacity: 0;
+}
+
+/* ————————————————————————— Hero ————————————————————————— */
+
+.hero {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+  pointer-events: none;
+  text-align: center;
+}
+
+.hero-word {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(3.2rem, 10.5vw, 9rem);
+  line-height: 0.9;
+  color: #fff;
+  text-shadow: 0 1px 28px rgba(0, 0, 0, 0.45);
+  display: flex;
+  gap: 0.32em;
+  overflow: hidden;
+  transform: scaleY(1.18);
+}
+
+.hero-word .ch {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* — intro: CSS only, so it runs on the compositor and stays smooth while
+   the page is still loading. Quick and snappy: a fast rise that lands
+   without a long tail. — */
+.hero-word .ch i {
+  display: inline-block;
+  font-style: normal;
+  animation: hero-rise 0.75s cubic-bezier(0.2, 0.9, 0.25, 1) backwards;
+  will-change: transform;
+}
+@keyframes hero-rise {
+  from {
+    transform: translateY(115%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.hero-tag {
+  animation: hero-tag-in 0.55s cubic-bezier(0.2, 0.9, 0.25, 1) 0.35s backwards;
+}
+@keyframes hero-tag-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.hero-cue {
+  animation: hero-fade 0.6s ease-out 0.7s backwards;
+}
+.awakening-strands {
+  animation: hero-fade 1.6s ease-out 0.4s backwards;
+}
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.hero-tag {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.1vw, 0.78rem);
+  letter-spacing: 0.5em;
+  text-indent: 0.5em;
+  color: var(--signal);
+  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.6);
+}
+
+.hero-cue {
+  position: absolute;
+  bottom: 4.5vh;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  color: #fff;
+}
+
+.hero-cue .line {
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), currentColor);
+  overflow: hidden;
+}
+
+.hero-cue span {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.42em;
+  text-indent: 0.42em;
+}
+
+/* ————————————————————————— Chapters —————————————————————————
+   One large statement per chapter with a row of three facts beneath.
+   Everything is scroll-driven from Film.tsx; nothing here animates. */
+
+.chap {
+  /* facts stay left of the strand's bright core at centre */
+  --facts-w: min(820px, calc(50vw - clamp(1.5rem, 7vw, 7.5rem) - 2.5rem));
+  position: absolute;
+  top: 50%;
+  left: clamp(1.5rem, 7vw, 7.5rem);
+  width: min(1180px, 86vw);
+  z-index: 5;
+  pointer-events: none;
+  visibility: hidden;
+  will-change: transform, opacity;
+}
+
+/* edgeless scrim so the type holds against the strand's glow */
+.chap::before {
+  content: '';
+  position: absolute;
+  inset: -30% -20% -30% -40%;
+  z-index: -1;
+  background: radial-gradient(
+    closest-side at 35% 50%,
+    rgba(5, 7, 11, 0.55),
+    rgba(5, 7, 11, 0.25) 55%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+.chap-kicker {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+.chap-kicker::before {
+  content: '';
+  width: 2.25rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, currentColor);
+}
+
+.chap-head {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 430;
+  font-size: clamp(3rem, 7.4vw, 8.4rem);
+  line-height: 0.98;
+  letter-spacing: -0.028em;
+  color: #fff;
+}
+
+.chap-line {
+  display: block;
+  overflow: hidden;
+  padding: 0.04em 0.08em 0.16em 0;
+  margin-bottom: -0.12em;
+}
+
+.chap-line > span {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+.chap-head em {
+  font-style: italic;
+  font-weight: 340;
+  color: var(--amber);
+}
+
+.chap-rule {
+  width: var(--facts-w);
+  height: 1px;
+  margin: clamp(2rem, 4.5vh, 3.25rem) 0 clamp(1.25rem, 2.6vh, 1.9rem);
+  transform-origin: left center;
+  background: linear-gradient(
+    90deg,
+    rgba(240, 190, 130, 0.6),
+    rgba(245, 238, 227, 0.16) 65%,
+    transparent
+  );
+}
+
+.chap-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.25rem, 2.6vw, 2.75rem);
+  width: var(--facts-w);
+}
+
+.fact {
+  will-change: transform, opacity;
+}
+
+.fact-value {
+  font-family: var(--font-display);
+  font-weight: 420;
+  font-size: clamp(1.35rem, 2.1vw, 2rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: #fff;
+  font-variant-numeric: lining-nums;
+}
+
+.fact-label {
+  margin-top: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  line-height: 1.65;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+/* alternate chapters answer from the right-hand side */
+.chap--right {
+  left: auto;
+  right: clamp(1.5rem, 7vw, 7.5rem);
+  text-align: right;
+}
+
+.chap--right::before {
+  inset: -30% -40% -30% -20%;
+  background: radial-gradient(
+    closest-side at 65% 50%,
+    rgba(5, 7, 11, 0.55),
+    rgba(5, 7, 11, 0.25) 55%,
+    transparent
+  );
+}
+
+.chap--right .chap-kicker {
+  flex-direction: row-reverse;
+}
+
+.chap--right .chap-kicker::before {
+  background: linear-gradient(270deg, transparent, currentColor);
+}
+
+.chap--right .chap-line {
+  padding: 0.04em 0 0.16em 0.08em;
+}
+
+.chap--right .chap-rule {
+  margin-left: auto;
+  transform-origin: right center;
+  background: linear-gradient(
+    270deg,
+    rgba(240, 190, 130, 0.6),
+    rgba(245, 238, 227, 0.16) 65%,
+    transparent
+  );
+}
+
+.chap--right .chap-facts {
+  margin-left: auto;
+}
+
+/* the reveal: centred over the point of light, on the dark world; the
+   bright flood follows once it has been read */
+.chap--final {
+  --facts-w: min(720px, 80vw);
+  z-index: 9;
+  /* sits above the point of light, which rests low in the frame */
+  top: 35%;
+  left: 50%;
+  width: min(1000px, 92vw);
+  text-align: center;
+}
+
+.chap--final::before {
+  inset: -25% -10%;
+  background: radial-gradient(closest-side, rgba(5, 7, 11, 0.45), transparent);
+}
+
+.chap--final .chap-kicker {
+  justify-content: center;
+}
+
+.chap--final .chap-kicker::after {
+  content: '';
+  width: 2.25rem;
+  height: 1px;
+  background: linear-gradient(90deg, currentColor, transparent);
+}
+
+.chap--final .chap-head {
+  font-size: clamp(4.5rem, 15vw, 14rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  text-shadow: 0 0 60px rgba(240, 190, 130, 0.25);
+}
+
+.chap--final .chap-line {
+  padding-right: 0;
+}
+
+.chap-sub {
+  max-width: 34rem;
+  margin: 1.6rem auto 0;
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.25vw, 1.15rem);
+  line-height: 1.55;
+  color: var(--cream);
+}
+
+.chap--final .chap-rule {
+  margin-left: auto;
+  margin-right: auto;
+  transform-origin: center;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(240, 190, 130, 0.5) 30%,
+    rgba(240, 190, 130, 0.5) 70%,
+    transparent
+  );
+}
+
+.chap--final .chap-facts {
+  margin: 0 auto;
+}
+
+@media (max-width: 760px) {
+  .chap {
+    left: 1.25rem;
+    width: calc(100vw - 2.5rem);
+  }
+  /* the point of light runs down the centre of the screen as the film plays
+     (about 32% from the top in Origin, 65% by Judgment). On phones the copy
+     can't sit beside it, so it is pinned by an edge, away from the point:
+     early chapters at the bottom, later ones at the top. */
+  .chap[data-chap='0'],
+  .chap[data-chap='1'],
+  .chap[data-chap='2'] {
+    --chap-ty: 0%;
+    top: auto;
+    bottom: calc(5vh + env(safe-area-inset-bottom, 0px));
+  }
+  .chap[data-chap='3'],
+  .chap[data-chap='4'] {
+    --chap-ty: 0%;
+    top: calc(64px + 3vh);
+  }
+  .chap::before,
+  .chap--right::before {
+    inset: -18% -12%;
+    background: radial-gradient(
+      closest-side,
+      rgba(5, 7, 11, 0.72),
+      rgba(5, 7, 11, 0.4) 60%,
+      transparent
+    );
+  }
+  .chap-head {
+    font-size: clamp(2.6rem, 12vw, 4.2rem);
+  }
+  .chap-kicker {
+    margin-bottom: 1.2rem;
+  }
+  .chap {
+    --facts-w: 100%;
+  }
+  .chap-facts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+  .fact-value {
+    font-size: clamp(1.1rem, 5vw, 1.4rem);
+  }
+  .fact-label {
+    margin-top: 0.4rem;
+    font-size: 0.56rem;
+    letter-spacing: 0.1em;
+  }
+  .chap-rule {
+    margin: 1.4rem 0 1rem;
+  }
+  .chap--right {
+    left: auto;
+    right: 1.25rem;
+  }
+
+  .chap--final {
+    left: 50%;
+    width: 92vw;
+  }
+  .chap--final .chap-head {
+    font-size: clamp(4rem, 22vw, 6.5rem);
+  }
+  .chap--final .chap-facts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+  .chap--final .fact {
+    display: block;
+  }
+  .chap--final .fact-label {
+    margin-top: 0.4rem;
+    font-size: 0.56rem;
+    letter-spacing: 0.1em;
+  }
+}
+
+/* touch screens: the grain's blend is re-composited on every scrolled frame */
+@media (pointer: coarse) {
+  .film-grain {
+    display: none;
+  }
+}
+
+/* Firefox: the grain's overlay blend is re-composited over the scrubbed
+   frame every scrolled frame, which it can't keep up with */
+.gecko .film-grain {
+  display: none;
+}

@@ -1,0 +1,226 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "TS3mYbbU4diPw29wIqYbK"
+uri = "file://artifacts/humn/lane-b/review/plate1-take1.jpg"
+type = "image"
+title = "Opening plate, take 1: review"
+description = "Top: one frame per second of the clip (0s to 5s). Bottom: the frame at 1.5s overlaid on the live site's 01 and 02 sections."
+logical_id = "7239c0cd-ff93-4ff0-88d5-07968e1e870c"
+content_hash = "sha256:3f6ee11cc80f0ec73bd8969df77373610e5c91786b3e91f756e38bec55d8004b"
+size = 78470
+mtime_ms = 1791077741451
+storage_uri = "gcs://replit-rams-assets-riker/rams/assets/repl:54f97825-1533-48b8-8c7b-4b47432e79a8/7239c0cd-ff93-4ff0-88d5-07968e1e870c/11dab6ec-0bd0-4b28-ae76-2e808410f8f1"
+storage_version_token = "1791077746061363"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "ikJXXCAfGcoTylC20C2Zx"
+uri = "file://artifacts/humn/lane-b/review/plate1-take2-480p.jpg"
+type = "image"
+title = "Opening plate, take 2 (480p): review"
+description = "Top: frames across the clip. Bottom: the clip at 1s and 4s overlaid on the live site's 01 Bedrock and 02 Context sections."
+logical_id = "e099181e-ad95-4aad-86a9-e9fb4b81657f"
+content_hash = "sha256:7ed7a4618d063decbbb82e60805bb8675ce73bd11d38669c7ab9f12ad4881a68"
+size = 67954
+mtime_ms = 1791078578503
+storage_uri = "gcs://replit-rams-assets-riker/rams/assets/repl:54f97825-1533-48b8-8c7b-4b47432e79a8/e099181e-ad95-4aad-86a9-e9fb4b81657f/adc2d07e-2a5d-41c3-9307-18f2b5baff6a"
+storage_version_token = "1791078579213151"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "s-03gsVsEJV7yGQ3lBVLT"
+uri = "file://artifacts/humn/lane-b/review/plate1-on-site.jpg"
+type = "image"
+title = "Side plate on the live site"
+description = "Hero, 01 Bedrock, 02 Context, and the start of 03 Tone, where the plate is fading out."
+logical_id = "5a9f0399-948b-4b9d-b14a-d3546cf43477"
+content_hash = "sha256:bb9e61984a3001b297f0a294fb77b3ad6cb72d1959521b0afb2993b118219af1"
+size = 47061
+mtime_ms = 1791078992409
+storage_uri = "gcs://replit-rams-assets-riker/rams/assets/repl:54f97825-1533-48b8-8c7b-4b47432e79a8/5a9f0399-948b-4b9d-b14a-d3546cf43477/f12c19e8-8a2f-4ce0-8e21-4cc7ec392a39"
+storage_version_token = "1791078993743037"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "VrIiR29QiuOq9mCieSvBq"
+uri = "file://artifacts/humn/lane-b/hf-test-01/test-01.mp4"
+type = "video"
+title = "Seedance 2.5 test 01 (5s, 480p)"
+description = "One generation: human biology augmented by machine intelligence."
+logical_id = "68899613-07d6-4240-afeb-fec3cc02afdd"
+content_hash = "sha256:92ad4c2062725af9f431d206ef084bae5242b078e68afbd345076c826b397420"
+size = 2326172
+mtime_ms = 1791136621425
+storage_uri = "gcs://replit-rams-assets-riker/rams/assets/repl:54f97825-1533-48b8-8c7b-4b47432e79a8/68899613-07d6-4240-afeb-fec3cc02afdd/b8957496-0a7e-49f3-9045-7fa1584e59c7"
+storage_version_token = "1791136754464829"
+content_type = "video/mp4"
+
+[[outputs]]
+id = "4gemjqDN5KuRPf64pth9l"
+uri = "file://artifacts/humn/lane-b/hf-test-01/contact.jpg"
+type = "image"
+title = "Test 01 frames at 0s, 1s, 2s, 3s, 4s and 5s"
+description = "One frame per second from the test clip."
+logical_id = "3baaa7c9-cdbb-4a16-a858-ae849ad91ef1"
+content_hash = "sha256:8c598c078472261af108301351f6dc9de73c034adee5c746bd1a50fa32a27341"
+size = 79773
+mtime_ms = 1791136742500
+storage_uri = "gcs://replit-rams-assets-riker/rams/assets/repl:54f97825-1533-48b8-8c7b-4b47432e79a8/3baaa7c9-cdbb-4a16-a858-ae849ad91ef1/aa361b7d-5585-4196-b8be-3f8d848a5b80"
+storage_version_token = "1791136755338947"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "VtvpPmu4N7oUDEL76IEOS"
+uri = "file://artifacts/humn/lane-b/hf-test-02/test-02.mp4"
+type = "video"
+title = "Seedance 2.5 test 02 (5s, 480p)"
+description = "Second single generation with your revised macro prompt."
+logical_id = "336561c2-474f-4484-be0f-6357b7bac8f1"
+content_hash = "sha256:5e54eb04ff4d1e1180fc14ec9eedd369a06cd8ad436fc374c42a53015f0b8eba"
+size = 3725214
+mtime_ms = 1791137269294
+storage_uri = "gcs://replit-rams-assets-riker/rams/assets/repl:54f97825-1533-48b8-8c7b-4b47432e79a8/336561c2-474f-4484-be0f-6357b7bac8f1/c626167f-879a-42d1-898b-0ad341a8009f"
+storage_version_token = "1791137353768655"
+content_type = "video/mp4"
+
+[[outputs]]
+id = "BMYou_BQ7-4rsrmDyaYQf"
+uri = "file://artifacts/humn/lane-b/hf-test-02/contact.jpg"
+type = "image"
+title = "Test 02 frames at 0s, 1s, 2s, 3s, 4s and 5s"
+description = "One frame per second from the test clip."
+logical_id = "1b635b99-e87d-4192-837f-2e30405b8826"
+content_hash = "sha256:09834efa5105091fdca9542a56ed4a918830b69292ef463fe89671cd0d4ee150"
+size = 118834
+mtime_ms = 1791137334425
+storage_uri = "gcs://replit-rams-assets-riker/rams/assets/repl:54f97825-1533-48b8-8c7b-4b47432e79a8/1b635b99-e87d-4192-837f-2e30405b8826/eab07204-c76c-4420-b05f-14c1fd5bf608"
+storage_version_token = "1791137354380298"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "_hWm0wIJL3gsCFEcYzkv7"
+uri = "file://artifacts/humn/lane-b/hf-test-03/test-03.mp4"
+type = "video"
+title = "Seedance 2.5 test 03 (10s, 480p) — Two faces, one face"
+description = "Third single generation: human face of amber particles meets machine face of ice-blue geometry, merging into one."
+logical_id = "a7edf95f-9ad3-4adb-89cf-c3fb5facc261"
+content_hash = "sha256:82ea66f6ff13d031ae4d08d30a6d9391f049b3d6b38edbd674c1a0b4b6a13578"
+size = 4927692
+mtime_ms = 1791138306843
+storage_uri = "gcs://replit-rams-assets-riker/rams/assets/repl:54f97825-1533-48b8-8c7b-4b47432e79a8/a7edf95f-9ad3-4adb-89cf-c3fb5facc261/ac44c82b-3f84-40e0-8821-9689330f048f"
+storage_version_token = "1791138448870676"
+content_type = "video/mp4"
+
+[[outputs]]
+id = "C7BqPETE9E0UQlBQeECxx"
+uri = "file://artifacts/humn/lane-b/hf-test-03/contact.jpg"
+type = "image"
+title = "Test 03 frames at 0s, 2s, 4s, 6s, 8s, 10s"
+description = "One frame every two seconds across the 10s clip."
+logical_id = "bfd1352e-47e1-4306-90a6-6968354b8236"
+content_hash = "sha256:f87e5b33a433d2980e8f6f50958fc5dd258e281d7f58f4a0a931fe6ab7f7bc5c"
+size = 74396
+mtime_ms = 1791138425962
+storage_uri = "gcs://replit-rams-assets-riker/rams/assets/repl:54f97825-1533-48b8-8c7b-4b47432e79a8/bfd1352e-47e1-4306-90a6-6968354b8236/a08c5b02-7bcc-4192-9200-1a7bef2aeae6"
+storage_version_token = "1791138449641244"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "d4jkx5GqvRYuEI9Pl-rTx"
+uri = "file://artifacts/humn/lane-b/hf-test-04/test-04.mp4"
+type = "video"
+title = "Seedance 2.5 test 04 (10s, 480p) — THE AWAKENING"
+description = "Your verbatim prompt: single amber human head, machine network enters through crown and temples, transformation, eyes open."
+logical_id = "274e13ca-2f33-4ab4-831c-df0cf90ab0be"
+content_hash = "sha256:2a30868cb2f25c50f82c1ad4df67666f9962e588c5b2062a762435f7054732c6"
+size = 3444626
+mtime_ms = 1791139739911
+storage_uri = "gcs://replit-rams-assets-riker/rams/assets/repl:54f97825-1533-48b8-8c7b-4b47432e79a8/274e13ca-2f33-4ab4-831c-df0cf90ab0be/53d1c725-b551-4ff1-a960-a0ab658d453d"
+storage_version_token = "1791139894774345"
+content_type = "video/mp4"
+
+[[outputs]]
+id = "ng8zoK6O_ucl7RPXYQDAl"
+uri = "file://artifacts/humn/lane-b/hf-test-04/contact.jpg"
+type = "image"
+title = "Test 04 frames at 0s, 2s, 4s, 6s, 8s, 10s"
+description = "One frame every two seconds across the 10s clip."
+logical_id = "b10c4b1d-1f65-443a-aa2f-409311e941d6"
+content_hash = "sha256:300ac6d337ba7f0aa1157dec24e639bdd72d0ca8b3fd3c827bd9116fcbea7a26"
+size = 86507
+mtime_ms = 1791139875211
+storage_uri = "gcs://replit-rams-assets-riker/rams/assets/repl:54f97825-1533-48b8-8c7b-4b47432e79a8/b10c4b1d-1f65-443a-aa2f-409311e941d6/ce79536a-e7f8-41e2-b806-5876b6e191bc"
+storage_version_token = "1791139895606533"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "mCoyryJ9zgGZkbbAN7qDQ"
+uri = "file://artifacts/humn/lane-b/hf-test-05/test-05.mp4"
+type = "video"
+title = "Seedance 2.5 test 05 (10s, 480p) — soul-form + absorbed lights"
+description = "Your verbatim prompt: amber soul-like particle head, line-free white lights absorbed beneath the surface, eyes open."
+logical_id = "73aa063b-7622-4e49-8900-5f0bc0f7d157"
+content_hash = "sha256:3b42b2a15292f37f6b5eaed8df40f59e31562f873878bf8df3de430daf9ae13c"
+size = 4218529
+mtime_ms = 1791141181063
+storage_uri = "gcs://replit-rams-assets-riker/rams/assets/repl:54f97825-1533-48b8-8c7b-4b47432e79a8/73aa063b-7622-4e49-8900-5f0bc0f7d157/bff2af21-09eb-4ea4-a5ce-da8e1a6a4eb8"
+storage_version_token = "1791141291603961"
+content_type = "video/mp4"
+
+[[outputs]]
+id = "vV0dH-dzDEawbA8Epv2lU"
+uri = "file://artifacts/humn/lane-b/hf-test-05/contact.jpg"
+type = "image"
+title = "Test 05 frames at 0s, 2s, 4s, 6s, 8s, 10s"
+description = "One frame every two seconds across the 10s clip."
+logical_id = "68858df4-8c5a-491d-80d7-209c2afebfdb"
+content_hash = "sha256:fd19a6cfcc304c2e867f2a2aaaeda186f79de3e9241b6bda872b3ec2b1036f75"
+size = 77081
+mtime_ms = 1791141270542
+storage_uri = "gcs://replit-rams-assets-riker/rams/assets/repl:54f97825-1533-48b8-8c7b-4b47432e79a8/68858df4-8c5a-491d-80d7-209c2afebfdb/0a7acdf5-4647-4678-8994-d6415234a748"
+storage_version_token = "1791141292462266"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "9KnXyWcUD4ItTQp0J2A5n"
+uri = "file://artifacts/humn/lane-b/hf-master-720p/master.mp4"
+type = "video"
+title = "Master render (10s, 720p) — revised prompt"
+description = "Test 04's prompt with string-free falling AI lights and ice-blue glowing eyes. 1280x720, 24fps."
+logical_id = "9bb1a229-60af-49cf-9cad-774ef0ba4299"
+content_hash = "sha256:4f86d0bb1c7a18bb7281351d27481183270cbb69f4cea687daa403febf203404"
+size = 10070395
+mtime_ms = 1791151915224
+storage_uri = "gcs://replit-rams-assets-riker/rams/assets/repl:54f97825-1533-48b8-8c7b-4b47432e79a8/9bb1a229-60af-49cf-9cad-774ef0ba4299/bc247ef6-9813-461d-83ac-caaf98ffcbb2"
+storage_version_token = "1791152022164922"
+content_type = "video/mp4"
+
+[[outputs]]
+id = "2dwP5x_RSuCeh9hF9cOtU"
+uri = "file://artifacts/humn/lane-b/hf-master-720p/contact.jpg"
+type = "image"
+title = "Master frames at 0s, 2s, 4s, 6s, 8s, 10s"
+description = "One frame every two seconds across the 10s master clip."
+logical_id = "de8a2932-fbe0-4e11-8d1f-6efa13e6e1af"
+content_hash = "sha256:d555cb5a70777945ce46cfdb40c1fc6e2cbe0012c2e37b8708c09df3ae1f99d0"
+size = 85969
+mtime_ms = 1791152003854
+storage_uri = "gcs://replit-rams-assets-riker/rams/assets/repl:54f97825-1533-48b8-8c7b-4b47432e79a8/de8a2932-fbe0-4e11-8d1f-6efa13e6e1af/9cd9e29f-595b-4f05-97e0-4fe7176aa5c4"
+storage_version_token = "1791152022786508"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "aGChvFnjIX9IT7njPxcSX"
+uri = "file://artifacts/humn/lane-b/review/awakening-on-site.jpg"
+type = "image"
+title = "Awakening video live in the pinned scroll"
+description = "Hero (0s), mid-film (4.6s), near the eyes-open climax (9.3s), and the final frame (10.04s) — scrubbed by scroll position."
+logical_id = "601cea47-21db-49ec-a7a8-ed90f930dad5"
+content_hash = "sha256:9ad13f8d6c1b485753a4d5971289a11d30a39cb6af4c12a5357652d1b7298cc5"
+size = 79510
+mtime_ms = 1791153444855
+storage_uri = "gcs://replit-rams-assets-riker/rams/assets/repl:54f97825-1533-48b8-8c7b-4b47432e79a8/601cea47-21db-49ec-a7a8-ed90f930dad5/03314447-b069-467a-8d47-e2ad6542619f"
+storage_version_token = "1791153473261413"
+content_type = "image/jpeg"

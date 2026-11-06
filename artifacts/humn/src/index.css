@@ -1,0 +1,260 @@
+@import 'tailwindcss';
+@import './film/film.css';
+@import './sections/sections.css';
+
+/* ————————————————————————— HUMN design tokens ————————————————————————— */
+
+:root {
+  --ink: #05070b;
+  --deep: #0a0f16;
+  --steel: #121a26;
+  --ice: #8fb8dc;
+  --signal: #bfe0f5;
+  --ember: #e09a5f;
+  --amber: #f0be82;
+  --cream: #f5eee3;
+  --paper: #fbf6ec;
+  --soil: #17130c;
+
+  --hair-cold: rgba(143, 184, 220, 0.16);
+  --hair-warm: rgba(23, 19, 12, 0.14);
+
+  --font-display: 'Fraunces', 'Georgia', serif;
+  --font-body: 'Inter Tight', 'Inter', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Menlo', monospace;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.45, 0, 0.15, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--amber);
+  color: var(--soil);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+/* ————————————————————————— Chrome / header ————————————————————————— */
+
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1.1rem clamp(1.25rem, 4vw, 3rem);
+  color: #fff;
+  transition: color 0.6s var(--ease-soft);
+}
+
+.site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 220%;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(5, 7, 11, 0.62), rgba(5, 7, 11, 0));
+  transition: opacity 0.6s var(--ease-soft);
+}
+
+/* phones: copy scrolls right under the header, so its backing is denser
+   (eased, so it has no visible lower edge) */
+@media (max-width: 760px) {
+  .site-header::before {
+    height: 190%;
+    background: linear-gradient(
+      to bottom,
+      rgba(5, 7, 11, 0.92) 0%,
+      rgba(5, 7, 11, 0.8) 30%,
+      rgba(5, 7, 11, 0.5) 58%,
+      rgba(5, 7, 11, 0.18) 82%,
+      rgba(5, 7, 11, 0) 100%
+    );
+  }
+}
+
+.site-header.on-light {
+  color: var(--soil);
+}
+
+.site-header.on-light::before {
+  opacity: 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.brand svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.brand .word {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.92rem;
+  letter-spacing: 0.3em;
+}
+
+.header-readout {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  opacity: 1;
+}
+
+.header-readout .bar {
+  width: 120px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.28;
+  position: relative;
+}
+
+.header-readout .bar i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0%;
+  background: currentColor;
+  opacity: 1;
+  display: block;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.cta-pill {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  padding: 0.62rem 1.15rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  transition:
+    background 0.35s var(--ease-out),
+    color 0.35s var(--ease-out),
+    transform 0.35s var(--ease-out);
+  white-space: nowrap;
+}
+
+.cta-pill:hover {
+  background: #fff;
+  color: var(--ink);
+  transform: translateY(-1px);
+}
+
+.site-header.on-light .cta-pill:hover {
+  background: var(--soil);
+  color: var(--cream);
+}
+
+@media (max-width: 760px) {
+  .header-readout {
+    display: none;
+  }
+}
+
+/* ————————————————————————— Cursor ————————————————————————— */
+
+.cursor {
+  display: none;
+}
+
+@media (pointer: fine) {
+  /* hide the system arrow/hand everywhere while the custom cursor runs */
+  html.has-cursor,
+  html.has-cursor * {
+    cursor: none !important;
+  }
+
+  .cursor {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 200;
+  }
+}
+
+/* ————————————————————————— Utilities ————————————————————————— */
+
+.wrap {
+  width: min(1200px, calc(100vw - 3rem));
+  margin-inline: auto;
+}
+
+.mono-tag {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+/* set by AfterFilm on regions that are off screen */
+.anim-off,
+.anim-off * {
+  animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "prompt": "One single unbroken cinematic shot, no cuts. The camera moves forward very slowly in a straight line, steady and smooth, with minimal sideways drift and no orbit. Deep near-black space with faint, distant galaxy dust and real depth. At the centre is living human biology: a cluster of real human neurons with branching dendrites and glowing synapses, wrapped around a slowly turning DNA double helix, rendered as translucent organic tissue in restrained warm amber light, with soft electrical pulses travelling along the nerve fibres like thoughts. Out of the darkness, precise hair-thin filaments of cool white and icy-blue machine intelligence appear, perfectly straight and engineered, and connect to the neurons at their synapses. Where each machine filament connects, the human nerve fibre grows a fine, ordered crystalline sheath and its amber pulses become faster, brighter and more precise, while the machine filaments themselves begin to branch like living dendrites. The neural network visibly grows more complex and more capable as the two intelligences integrate. By the end the human neurons and the machine filaments form one coherent augmented nervous system, organic and engineered at once, glowing softly in amber and ice-white against the deep dark. Slow, deliberate, elegant transformation. Shallow depth of field, volumetric atmosphere, photoreal scientific macro detail, luxury film grade, high contrast, deep blacks. No text, no letters, no numbers, no UI, no logos, no holograms, no screens, no grid squares, no explosions, no flashes, no lens flares, no purple or magenta.",
+  "duration": 5,
+  "resolution": "480p",
+  "aspect_ratio": "16:9",
+  "output_format": "mp4",
+  "generate_audio": false
+}

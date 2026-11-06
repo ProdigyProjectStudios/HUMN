@@ -1,0 +1,129 @@
+Before we consider Lane B or generated video, I want a major CREATIVE ESCALATION PASS on the existing Lane A build.
+
+IMPORTANT:
+Do NOT rebuild HUMN from scratch.
+Do NOT replace the STRATA × CORRECTION concept.
+Preserve everything that is already working:
+- information architecture
+- copy
+- chapter sequence
+- scroll choreography
+- transformation of the answer
+- typography system
+- header/content seam
+- responsive structure
+
+The current build is strong. I want you to take it from “very impressive AI-built site” to “holy fuck, this looks like a $50k–$100k creative studio build.”
+
+Stay entirely in Lane A. NO generated footage yet.
+
+FOCUS THE NEXT PASS ON VISUAL WORLD-BUILDING AND DEPTH.
+
+1. MAKE THE BACKGROUND A LIVING WORLD
+The current background is too visually simple relative to the strength of the scrolling.
+
+Create a continuously evolving procedural visual environment behind and around the content.
+
+Explore whichever techniques best serve STRATA:
+- WebGL / Three.js / React Three Fiber
+- GLSL shaders
+- procedural fields
+- volumetric-feeling light
+- refractive/translucent surfaces
+- depth fog
+- subtle particles
+- flowing data structures
+- distortion fields
+- physically responsive light
+- spatial parallax
+
+Do not add random 3D decoration.
+The environment must visualize the transformation from raw machine intelligence to human-grade intelligence.
+
+BEDROCK should feel cold, computational, dense and almost subterranean.
+
+As we rise:
+CONTEXT introduces memory structures.
+TONE introduces warmth and softness.
+NUANCE introduces refraction / multiple interpretations.
+TRUST introduces constraint, correction and controlled clarity.
+SURFACE should feel radically more open, human and luminous.
+
+The WORLD itself must transform — not just the text.
+
+2. MAKE THE LIGHT THREAD A SIGNATURE OBJECT
+The request/answer thread should become the visual protagonist of the experience.
+
+Give it real dimensional presence.
+Make its material/behavior visibly evolve through every layer.
+
+It should feel custom enough that somebody remembers HUMN because of it.
+
+3. PUSH THE CAMERA AND DEPTH
+The ascent should feel spatial.
+
+I want a strong sense that the visitor is moving THROUGH a world rather than scrolling through sections.
+
+Use depth, scale, occlusion, camera movement and parallax carefully.
+
+Do not sacrifice readability.
+
+4. PUSH TYPOGRAPHY HARDER
+Treat type as part of the cinematic composition.
+
+Explore:
+- extreme scale shifts
+- masks
+- clipping
+- depth interactions
+- kinetic type
+- controlled character movement
+- text interacting with the visual world
+
+Keep it sophisticated and editorial.
+Do not turn it into motion-design noise.
+
+5. ADD 2–3 SIGNATURE MOMENTS
+Create a small number of interactions/transitions that feel genuinely unexpected.
+
+Not lots of effects.
+
+I want 2–3 moments where an experienced agency creative director would stop scrolling because they have not seen the exact treatment before.
+
+6. MICRO-DETAIL
+Polish:
+- cursor response
+- easing
+- hover behavior
+- transition timing
+- subtle ambient movement
+- chapter handoffs
+- texture
+- depth
+- loading/entrance behavior
+
+Everything should feel intentional.
+
+7. PERFORMANCE
+Do not buy beauty with terrible performance.
+
+Audit the current ~40ms reported frame time.
+Optimize toward genuinely fluid desktop rendering — approximately 60fps / ~16.7ms frame budget where practical.
+
+Use adaptive quality / reduced effects where necessary on weaker hardware and mobile.
+
+8. QUALITY GATE
+When finished, visually inspect every chapter again.
+
+Ask yourself:
+“Would this still look extraordinary if all generated video were permanently forbidden?”
+
+If the answer is no, keep improving it.
+
+The objective is for Lane A alone to already feel like an elite creative-development piece.
+
+Do NOT start Lane B.
+Do NOT generate video.
+Do NOT add more ordinary sections.
+
+Upgrade the existing experience.
